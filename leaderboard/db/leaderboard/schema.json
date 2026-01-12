@@ -1,0 +1,1 @@
+{"columns": {"id": "INT", "name": "TEXT", "score": "INT"}, "indexes": ["id"]}

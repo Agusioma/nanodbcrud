@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gaming Leaderboard</title>
+    <link href="{% static 'players/bootstrap.min.css' %}" rel="stylesheet">
+ </head>
+<body class="p-4">
+  <h1>Leaderboard</h1>
+
+  <form id="addForm" class="mb-3">
+      {% csrf_token %}
+    <input type="text" name="name" placeholder="Player Name" required>
+    <input type="number" name="score" placeholder="Score" required>
+    <button type="submit" class="btn btn-primary btn-sm">Add Player</button>
+  </form>
+
+  <table class="table table-striped" id="leaderboard">
+    <thead>
+      <tr><th>Name</th><th>Score</th><th>Rank</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for player in players %}
+      <tr data-id="{{ player.id }}">
+        <td>{{ player.name }}</td>
+        <td><input type="number" class="form-control score" value="{{ player.score }}"></td>
+          <td>{{ forloop.counter }}</td>
+        <td>
+          <button class="btn btn-success btn-sm update-btn">Update</button>
+          <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  <script src="{% static 'players/main.js' %}"> </script>
+</body>
+</html>
